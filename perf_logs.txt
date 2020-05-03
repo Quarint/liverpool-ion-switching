@@ -1,0 +1,6 @@
+Random Forest
+20 shift + 5 random noise : sample_size = 100000, mean_score = 0.8968591918217097, std = 0.003132989564079948
+5 shift : sample_size = 100000, mean_score = 0.8798710623844173, std = 0.0012283351198885606
+10 shift : sample_size = 100000, mean_score = 0.8966208851947544, std = 0.0015358531925055185
+10 shift with index div by 50000: sample_size = 100000, mean_score = 0.9280082747111125, std = 0.0024326075061608075
+

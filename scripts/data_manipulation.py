@@ -16,19 +16,15 @@ def load_data():
     test_data = pd.read_csv(test_file)
     return (predictions_folder, all_data, test_data)
 
-def load_shifted_values(df_list):
+def load_shifted_values(df_list, max_shift):
     def add_shifted(df, shift=1):
         first_value_fill = np.full(shift, df['signal'].iloc[0])
         last_value_fill = np.full(shift, df['signal'].iloc[-1])
         df['previous_signal_'+str(i)] = np.insert(df['signal'].iloc[0:-1*shift].values, 0, first_value_fill)
         df['next_signal_'+str(i)] = np.append(df['signal'].iloc[shift:].values, last_value_fill)
     for df in df_list:
-        for i in range(1, 4):
+        for i in range(1, max_shift):
             add_shifted(df, i)
-        if 'open_channels' in df.columns:
-            df = df[['time', 'previous_signal_3', 'previous_signal_2', 'previous_signal_1', 'signal', 'next_signal_1', 'next_signal_2', 'next_signal_3', 'open_channels']]
-        else:
-            df = df[['time', 'previous_signal_3', 'previous_signal_2', 'previous_signal_1', 'signal', 'next_signal_1', 'next_signal_2', 'next_signal_3']]
 
 def save_for_submission(test_df, predictions, predictions_folder, file_name):
     predictions_df = test_df[['time']].copy(deep=True)
